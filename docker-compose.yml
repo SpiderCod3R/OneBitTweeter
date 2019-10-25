@@ -1,0 +1,32 @@
+version: '3.5'
+
+services:
+  postgres:
+    image: "postgres:12.0"
+    volumes:
+      - postgres:/var/lib/postgresql/data
+  
+  redis:
+    image: "redis:3.2-alpine"
+    command: redis-server
+    ports:
+      - "6989:6989"
+    volumes:
+      - redis:/var/lib/redis/data
+  
+  app:
+    depends_on:
+      - "postgres"
+      - "redis"
+    build: .
+    command: bash start.sh
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/onebittwitter
+      - app-gems:/app-gems
+
+volumes:
+  redis:
+  postgres:
+  app-gems:
