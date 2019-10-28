@@ -1,7 +1,7 @@
 module Api
   module V1
     class TweetsController < Api::V1::ApiController
-      before_action :set_current_user
+      before_action { current_user }
       before_action :set_tweet, except: %i[create index]
       before_action :authenticate_user, except: [:show]
       load_and_authorize_resource except: %i[index show create]
@@ -39,10 +39,6 @@ module Api
       end
 
       private
-        def set_current_user
-          @current_user = (current_user) ? current_user : nil 
-        end
-        
         def set_tweet
           @tweet = Tweet.find(params[:id])
         end
