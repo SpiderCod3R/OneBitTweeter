@@ -70,6 +70,10 @@ end
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
+# Upload
 gem 'carrierwave'
 gem 'carrierwave-base64'
 gem 'cloudinary'
+
+# Cron Simulator using Jobs
+gem 'sidekiq-scheduler', '~> 3.0'
